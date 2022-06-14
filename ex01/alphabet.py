@@ -5,7 +5,7 @@ repeat = 5
 sub = 10
 miss = 2
 
-def main():
+def main(): #メイン関数
     start_time = time.perf_counter()
     for _ in range(repeat):
         seikai = shutudai()
@@ -16,7 +16,7 @@ def main():
     elapsed_time = end_time - start_time
     print(f"所要時間{elapsed_time}秒かかりました")
             
-def shutudai():
+def shutudai(): #出題関数
     alphabets = [chr(c+65) for c in range(26)]
     sub_lst = random.sample(alphabets, repeat)
     print(f"対象文字 : {sub_lst}")
@@ -29,7 +29,7 @@ def shutudai():
 
     return miss_lst
 
-def kaitou(seikai):
+def kaitou(seikai): #解答関数
     num = int(input("欠損文字はいくつあるでしょうか？"))
     if num != miss:
         print("不正解です")
