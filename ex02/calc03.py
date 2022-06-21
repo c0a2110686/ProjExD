@@ -51,6 +51,7 @@ class CaluGui(object):
                 button.bind('<Button-1>', self.click_button) # Buttonが押された場合
     
     def click_button(self, event):
+        #四則演算の設定
         check = event.widget['text'] # 押したボタンのCheck
  
         if check == '=': # イコールの場合
