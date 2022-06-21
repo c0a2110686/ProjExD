@@ -39,7 +39,14 @@ class CaluGui(object):
  
         for y, row in enumerate(BUTTON, 1): # Buttonの配置
             for x, num in enumerate(row):
-                button = tk.Button(button_frame, text=num, font=('', 15), width=6, height=3, bg="#F0FFFF", fg='#FF69B4')
+                button = tk.Button(button_frame, 
+                                    text=num, 
+                                    font=('', 15),
+                                    width=6, 
+                                    height=3, 
+                                    bg="#F0FFFF", 
+                                    fg='#FF69B4'
+                                    )
                 button.grid(row=y, column=x) # 列や行を指定して配置
                 button.bind('<Button-1>', self.click_button) # Buttonが押された場合
     
