@@ -11,23 +11,23 @@ def key_up(event):
 
 def main_proc():
     global cx, cy, mx, my
-    #delta = { #キー:押されているキーkey/値: 移動幅リスト[x,y]
-    #    ""     : [0, 0],
-    #    "Up"   : [0, -1],
-    #    "Down" : [0, +1],
-    #    "Left" : [-1, 0],
-    #    "Right": [+1, 0],
-    #}
-    #try:
-    #    if maze_bg[mx+delta[key][0]][mx+delta[key][0]] == 0: #もし移動先が床なら
-    #        my, mx = my+delta[key][1], mx+delta[key][0]
-    #except:
-    #    pass
+    delta = { #キー:押されているキーkey/値: 移動幅リスト[x,y]
+        #""     : [0, 0],
+        "Up"   : [0, -1],
+        "Down" : [0, +1],
+        "Left" : [-1, 0],
+        "Right": [+1, 0],
+    }
+    try:
+        if maze_bg[mx+delta[key][1]][mx+delta[key][0]] == 0: #もし移動先が床なら
+            my, mx = my+delta[key][1], mx+delta[key][0]
+    except:
+        pass
 
-    if key == "Up"    and maze_bg[my-1][mx] == 0 : my -= 1
-    if key == "Down"  and maze_bg[my+1][mx] == 0 : my += 1
-    if key == "Left"  and maze_bg[my][mx-1] == 0 : mx -= 1
-    if key == "Right" and maze_bg[my][mx+1] == 0 : mx -= 1
+    #if key == "Up"    and maze_bg[my-1][mx] == 0 : my -= 1
+    #if key == "Down"  and maze_bg[my+1][mx] == 0 : my += 1
+    #if key == "Left"  and maze_bg[my][mx-1] == 0 : mx -= 1
+    #if key == "Right" and maze_bg[my][mx+1] == 0 : mx -= 1
     cx, cy = mx*100+50, my*100+50
     #cx, cy = cx+delta[key][0], cy+delta[key][1]
     canvas.coords("tori", cx, cy)
@@ -52,6 +52,7 @@ if __name__ == "__main__":
     canvas.create_image(cx, cy, image=tori, tag="tori")
 
     key = ""
+    
     root.bind("<KeyPress>", key_down)
     root.bind("<KeyRelease>", key_up)
 
