@@ -1,4 +1,5 @@
 import tkinter as tk
+import maze_maker as mm
 
 def key_down(event):
     global key
@@ -29,6 +30,10 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん")
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack()
+
+    maze_bg = mm.make_maze(15, 9) #1:壁１/0:床を表す二次元リスト
+    mm.show_maze(canvas, maze_bg) #canvasにmaze_bgを描く
+    #print(maze_bg)
 
     tori = tk.PhotoImage(file="fig/5.png")
     cx, cy = 300, 400
