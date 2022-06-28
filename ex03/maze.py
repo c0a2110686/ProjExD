@@ -15,7 +15,6 @@ def main_proc():
   global cx, cy, mx, my
 
   d = {  # キー：押されているキーkey/値: 移動幅リスト[x,y]
-    #"": [0, 0],
     "Up":[0, -1],
     "Down": [0, +1],
     "Left": [-1, 0],
