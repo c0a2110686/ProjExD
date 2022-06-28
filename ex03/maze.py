@@ -30,7 +30,6 @@ def main_proc():
 
 
   cx, cy = mx*100+50, my*100+50
-  #cx, cy = cx+d[key][0], cy+d[key][1]
   canvas.coords("tori", cx, cy)
   root.after(100, main_proc)
 
