@@ -32,7 +32,7 @@ def main_proc():
   canvas.coords("tori", cx, cy)
   root.after(100, main_proc)
 
-def add_enemy():
+def add_enemy():  #teki1をランダムに出力
     global cx, cy, dx, dy, teki
     teki1 = tk.PhotoImage(file="fig/43012274426004b86abe4d47172c8ee8.png")
     dx = random.randint(0, 13)
