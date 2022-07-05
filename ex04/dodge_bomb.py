@@ -67,10 +67,10 @@ def main():
         #爆弾の当たり判定
         if mf_rect.colliderect(bomb_rect) == True:  #mfがbombと重なったらTrue
             over = pg.image.load("fig/usagi.gif")
-            over = pg.transform.rotozoom(over, 1, 1.5)
+            over = pg.transform.rotozoom(over, 0, 2.0)
             over_rct = over.get_rect()
-            screen.blit(over, over_rct)
-            #over.center =900, 400                               #ミフィーの中心を900,400に指定
+            over_rct.center = 800, 400    
+            screen.blit(over, over_rct)                           
             pg.display.update()
             clock.tick(0.3)
             return                                  #終了(mainから抜ける)
