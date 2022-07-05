@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import random
 
 def main():
     clock = pg.time.Clock()  #タイマーを作る
@@ -16,6 +17,12 @@ def main():
     kkimg_rct = kkimg_sfc.get_rect()                     #Rect
     kkimg_rct.center = 900, 400                          #900x400の位置にこうかとんの場所を設定
     
+    #練習5 爆弾
+    bmimg_sfc = pg.Surface((20, 20)) #Surface
+    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10)
+    bmimg_rct = bmimg_sfc.get_rect()
+    bmimg_rct.centerx = random.randint(0, screen_rct.width)
+    bmimg_rct.centery = random.randint(0, screen_rct.height)
 
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rct)
