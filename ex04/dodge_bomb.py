@@ -30,10 +30,10 @@ def main():
     #爆弾作成
     bomb = pg.image.load("fig/ninnjinn.png")                #にんじん画像用のsurface
     bomb =  pg.transform.rotozoom(bomb, 0, 0.8)             #にんじん画像の拡大
-    bomb_rect = bomb.get_rect()                             #爆弾用rect
-    bomb_rect.centerx = random.randint(0,sc_rect.width)     #爆弾のx座標をランダムに決定
-    bomb_rect.centery = random.randint(0,sc_rect.height)    #爆弾のy座標をランダムに決定
-                                                            #爆弾用surfaceを画面用surfaceに貼り付ける
+    bomb_rect = bomb.get_rect()                             #ninnjinn用rect
+    bomb_rect.centerx = random.randint(0,sc_rect.width)     #ninnjinnのx座標をランダムに決定
+    bomb_rect.centery = random.randint(0,sc_rect.height)    #ninnjinnのy座標をランダムに決定
+                                                            #ninnjinn用surfaceを画面用surfaceに貼り付ける
     vx, vy = +1, +1  
 
 
@@ -57,14 +57,14 @@ def main():
                     mf_rect.centery -= delta[1]
         screen.blit(mf_img,mf_rect)
 
-        #爆弾の移動
-        bomb_rect.move_ip(vx,vy)                    #爆弾用のrectを移動する
-        screen.blit(bomb, bomb_rect)                #爆弾の画像を貼り付ける
+        #ninnjinnの移動
+        bomb_rect.move_ip(vx,vy)                    #ninnjinn用のrectを移動する
+        screen.blit(bomb, bomb_rect)                #ninnjinnの画像を貼り付ける
         ret = check_bound(sc_rect, bomb_rect)       #check_bound()関数で画面外にいるかの判定
         vx *= ret[0]                                #横方向に画面外なら、横方向速度の符号反転
         vy *= ret[1]                                #縦方向に画面外なら、縦方向速度の符号反転
 
-        #爆弾の当たり判定
+        #ninnjinnの当たり判定
         if mf_rect.colliderect(bomb_rect) == True:  #mfがbombと重なったらTrue
             over = pg.image.load("fig/usagi.gif")
             over = pg.transform.rotozoom(over, 0, 2.0)
