@@ -46,7 +46,8 @@ def main():
             kkimg_rct.centerx -= 1   #x座標を-1
         if key_states[pg.K_RIGHT] == True: 
             kkimg_rct.centerx += 1   #x座標を+1
-        if check_bound(screen_rct, kkimg_sfc) != (1, 1): #領域外だったら
+
+        if check_bound(kkimg_rct, screen_rct) != (1, 1): #領域外だったら
             if key_states[pg.K_UP] == True: 
                 kkimg_rct.centery += 1   #y座標を-1
             if key_states[pg.K_DOWN] == True: 
@@ -66,16 +67,18 @@ def main():
         vx *= yoko
         vy *= tate
 
-        #練習8
         
+
 
         pg.display.update()
         clock.tick(1000)     #1秒間1000画像Windowsが開いた状態になる
 
 def check_bound(rct, scr_rct): #RectとScreenRect
     x, y = +1, +1 #領域内
-    if rct.left < scr_rct.left or scr_rct.right < rct.right: x = -1 #領域外にいったら-1
-    if rct.top < scr_rct.top or scr_rct.bottom < rct.bottom: y = -1 #領域外にいったら-1
+    if rct.left < scr_rct.left or scr_rct.right < rct.right:
+        x = -1
+    if rct.top < scr_rct.top or scr_rct.bottom < rct.bottom:
+        y = -1
     return x, y
 
 
