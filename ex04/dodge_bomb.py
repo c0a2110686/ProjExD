@@ -23,13 +23,13 @@ def main():
     #rotozoomは画像の拡大縮小回転(画像名,回転,拡縮)
     mf_img=  pg.transform.rotozoom(mf_img, 0, 0.8)         #ミフィー画像の拡大
     mf_rect = mf_img.get_rect()                            #ミフィー画像用のrect
-    mf_rect.center =900, 450                               #ミフィーの中心を900,400に指定
+    mf_rect.center =900, 400                               #ミフィーの中心を900,400に指定
     #blit(画像名,サイズ)
     screen.blit(mf_img, mf_rect) 
 
     #爆弾作成
-    bomb = pg.Surface((20,20))                              #爆弾用のsurface
-    pg.draw.circle(bomb, (255,0,0),(10,10),10)              #爆弾用surfaceに円を描く。色、中心、半径を指定
+    bomb = pg.image.load("fig/ninnjinn.png")                #にんじん画像用のsurface
+    bomb =  pg.transform.rotozoom(bomb, 0, 0.8)             #にんじん画像の拡大
     bomb_rect = bomb.get_rect()                             #爆弾用rect
     bomb_rect.centerx = random.randint(0,sc_rect.width)     #爆弾のx座標をランダムに決定
     bomb_rect.centery = random.randint(0,sc_rect.height)    #爆弾のy座標をランダムに決定
@@ -46,7 +46,7 @@ def main():
             if event.type == pg.QUIT:
                 return
 
-        #こうかとんの移動
+        #ミフィーの移動
         key_states = pg.key.get_pressed()                       #どのキーが押されているか記録した辞書を作成
         for key, delta in key_delta.items():                    #key_deltaから
             if key_states[key] == True:                         #keyが押されていたら
