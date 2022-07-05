@@ -23,7 +23,21 @@ def main():
 
         #練習2
         for event in pg.event.get():
-            if event.type == pg.QUIT: return
+            if event.type == pg.QUIT: 
+                return
+
+        #練習４
+        key_states = pg.key.get_pressed() #辞書
+        if key_states[pg.K_UP] == True: 
+            kkimg_rct.centery -= 1   #y座標を-1
+        if key_states[pg.K_DOWN] == True: 
+            kkimg_rct.centery += 1   #y座標を+1
+        if key_states[pg.K_LEFT] == True: 
+            kkimg_rct.centery -= 1   #x座標を-1
+        if key_states[pg.K_RIGHT] == True: 
+            kkimg_rct.centery += 1   #x座標を+1
+
+        
 
         pg.display.update()
         clock.tick(1000)     #1000秒間Windowsが開いた状態になる
