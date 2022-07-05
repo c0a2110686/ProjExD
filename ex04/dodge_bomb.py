@@ -4,6 +4,7 @@ import random
 
 def main():
     clock = pg.time.Clock()  #タイマーを作る
+
     pg.display.set_caption("逃げろ！こうかとん")  #タイトルバーに「逃げろ...」を表示する
     screen_sfc = pg.display.set_mode((1600, 900))  #1600x900の画面Surfaceを生成する
     screen_rct = screen_sfc.get_rect()             #Rect
@@ -18,11 +19,13 @@ def main():
     kkimg_rct.center = 900, 400                          #900x400の位置にこうかとんの場所を設定
     
     #練習5 爆弾
-    bmimg_sfc = pg.Surface((20, 20)) #Surface
-    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10)
+    bmimg_sfc = pg.Surface((20, 20)) #Surface(幅 : 20, 高さ : 100)を生成する
+    bmimg_sfc.set_colorkey((0, 0, 0)) #円の周りを黒に設定
+    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10) #Surfaceであるbmimg_sfcを赤で((255, 0, 0))で位置(横:50, 縦:10)に半径10の円を描写する
     bmimg_rct = bmimg_sfc.get_rect()
-    bmimg_rct.centerx = random.randint(0, screen_rct.width)
+    bmimg_rct.centerx = random.randint(0, screen_rct.width)  #Surfaceであるbmimg_sfcを画面用Surfaceであるscreenの位置(ランダム)に描写する
     bmimg_rct.centery = random.randint(0, screen_rct.height)
+    vx, vy = +1, +1
 
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rct)
@@ -40,11 +43,13 @@ def main():
         if key_states[pg.K_DOWN] == True: 
             kkimg_rct.centery += 1   #y座標を+1
         if key_states[pg.K_LEFT] == True: 
-            kkimg_rct.centery -= 1   #x座標を-1
+            kkimg_rct.centerx -= 1   #x座標を-1
         if key_states[pg.K_RIGHT] == True: 
-            kkimg_rct.centery += 1   #x座標を+1
+            kkimg_rct.centerx += 1   #x座標を+1
 
-        
+        #練習6
+        bmimg_rct.move_ip(vx, vy)
+        screen_sfc.blit(bmimg_sfc, bmimg_rct)
 
         pg.display.update()
         clock.tick(1000)     #1000秒間Windowsが開いた状態になる
