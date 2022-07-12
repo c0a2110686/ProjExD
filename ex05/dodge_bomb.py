@@ -2,16 +2,32 @@ import pygame as pg
 import sys
 import random
 
+class Screen:
+    def __init__(self, title, wh, image):
+        pg.display.set_caption(title)
+        self.sfc = pg.display.set_mode(wh)        # Surface
+        self.rct = self.sfc.get_rect()            # Rect
+        self.bgi_sfc = pg.image.load(image)       # Surface
+        self.bgi_rct = self.bgi_sfc.get_rect()    # Rect
+        
+    def blit(self):
+        self.sfc.blit(self.bgi_sfc, self.bgi_rct)
+
+
+
+
+
 def main():
     clock = pg.time.Clock()
 
     # 練習1：スクリーンと背景画像
-    pg.display.set_caption("逃げろ！こうかとん")
-    screen_sfc = pg.display.set_mode((1600, 900)) # Surface
-    screen_rct = screen_sfc.get_rect()            # Rect
-    bgimg_sfc = pg.image.load("fig/pg_bg.jpg")    # Surface
-    bgimg_rct = bgimg_sfc.get_rect()              # Rect
-    screen_sfc.blit(bgimg_sfc, bgimg_rct)
+    #pg.display.set_caption("逃げろ！こうかとん")
+    #screen_sfc = pg.display.set_mode((1600, 900)) # Surface
+    #screen_rct = screen_sfc.get_rect()            # Rect
+    #bgimg_sfc = pg.image.load("fig/pg_bg.jpg")    # Surface
+    #bgimg_rct = bgimg_sfc.get_rect()              # Rect
+    #screen_sfc.blit(bgimg_sfc, bgimg_rct)
+    scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     # 練習3：こうかとん
     kkimg_sfc = pg.image.load("fig/6.png")    # Surface
