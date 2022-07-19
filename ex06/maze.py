@@ -1,5 +1,7 @@
 import tkinter
 import random
+from tkinter import messagebox
+import time
 
 # キャンバスのサイズ設定
 CANVAS_WIDTH = 1600
@@ -479,6 +481,8 @@ class Maze():
             font=("", 80),
             text="ゲームクリア！"
         )
+        end = time.time() - begin
+        messagebox.showinfo("GOAL", f"{end}秒かかりました。")
 
         self.master.unbind("<KeyPress-Up>")
         self.master.unbind("<KeyPress-Left>")
@@ -488,7 +492,7 @@ class Maze():
 app=tkinter.Tk()
 
 maze=Maze(app)
-
+begin = time.time()
 maze.play()
 
 app.mainloop()
