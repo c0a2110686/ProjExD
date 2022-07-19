@@ -15,7 +15,6 @@ WALL_COLOR = "MidnightBlue"       #壁の色
 GOAL_COLOR = "blue"               #ゴールの色
 START_COLOR = "red"               #スタートの色
 PASSED_COLOR = "orange"           #海藤表示時の経路の色
-#main = tkinter.PhotoImage(file="fig/43012274426004b86abe4d47172c8ee8.png")
 NOW_COLOR = "SkyBlue"             #現在地の色
 
 # 数値の定義
