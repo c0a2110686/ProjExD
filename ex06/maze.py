@@ -486,6 +486,7 @@ class Maze():
         self.master.unbind("<KeyPress-Down>")
 
 app=tkinter.Tk()
+app.title(u"フレゼミの女！！！！！")    #aoi
 
 maze=Maze(app)
 
