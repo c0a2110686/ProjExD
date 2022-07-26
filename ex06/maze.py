@@ -488,7 +488,7 @@ class Maze():
             CANVAS_WIDTH // 2,
             CANVAS_HEIGHT // 2,
             fill="red",
-            font=("@Terminal", 100),
+            font=("@Terminal", 100),   #三島
             text="GAME CLEAR!!",
         ) 
         # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
