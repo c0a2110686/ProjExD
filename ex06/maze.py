@@ -60,7 +60,6 @@ class Maze():
         # 1つ前の位置
         self.before = None
 
-
         # スタートとゴールの位置
         self.start = None
         self.goal = None
@@ -488,11 +487,7 @@ class Maze():
             CANVAS_WIDTH // 2,
             CANVAS_HEIGHT // 2,
             fill="red",
-<<<<<<< HEAD
-            font=("@Terminal", 100), #三島
-=======
             font=("@Terminal", 100),   #三島
->>>>>>> 0420301f5a206cdeea54dd672873ef260b23d3cc
             text="GAME CLEAR!!",
         ) 
         # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
