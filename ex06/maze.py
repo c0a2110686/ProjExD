@@ -1,13 +1,21 @@
 from dis import show_code
 from re import L
 import tkinter as tk
+
+#追加したい物　自分の足跡をつける機能を追加する
+#壁を0　#通路を1
+import tkinter
 import random
+from tkinter import messagebox
+import time
 
 # キャンバスのサイズ設定
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 450
+CANVAS_WIDTH = 1600 #元サイズ1600
+CANVAS_HEIGHT = 900 #元サイズ900
 
-# 迷路のサイズ設定
+# 迷路のサイズ設定#
 WIDTH = 41 
 HEIGHT = 23 
 
@@ -18,6 +26,7 @@ GOAL_COLOR = "blue"               #ゴールの色
 START_COLOR = "red"               #スタートの色
 PASSED_COLOR = "orange"           #海藤表示時の経路の色
 NOW_COLOR = "SkyBlue"             #現在地の色
+AFTER_COLOR = "SpringGreen"       #移動後の色  #三島
 
 # 数値の定義
 PATH = 0
@@ -26,6 +35,7 @@ GOAL = 2
 START = 3
 PASSED = 4
 NOW = 5
+AFTER = 6                         #三島
 
 UP = 0
 DOWN = 1
@@ -51,8 +61,12 @@ class Maze():
         # 現在位置
         self.now = None
 
+        #過ぎた後の位置　          #三島
+        self.after = None
+
         # 1つ前の位置
         self.before = None
+
 
         # スタートとゴールの位置
         self.start = None
@@ -215,6 +229,8 @@ class Maze():
             color = PASSED_COLOR
         elif self.maze[j][i] == NOW:
             color = NOW_COLOR
+        elif self.maze[j][i] == AFTER:  #三島
+            color = AFTER_COLOR
         else:
             print("そんなマスはあり得ません")
             return
@@ -368,11 +384,13 @@ class Maze():
         self.master.bind("<KeyPress-Left>", self.left_move)
         self.master.bind("<KeyPress-Right>", self.right_move)
 
+#ここに移動後の色を追加する
     def update(self):
         '''移動後の状態に迷路リストを更新'''
 
         # 移動後の現在地を取得
         i, j = self.now
+        #i, j = self.after
 
         # GOALであれば終了処理
         if self.maze[j][i] == GOAL:
@@ -385,12 +403,12 @@ class Maze():
         # 色を更新
         self.change_color(i, j)
 
-        # 移動前の現在地を取得
+       ##### # 移動前の現在地を取得
         i, j = self.before
 
         # 移動前の位置を更新
         if self.before != self.start:
-            self.maze[j][i] = PATH
+            self.maze[j][i] = AFTER     #三島
         else:
             self.maze[j][i] = START
 
@@ -475,6 +493,7 @@ class Maze():
             return
 
         self.before=self.now  #
+        self.before=self.now
 
         # 移動後の座標を現在位置に設定
         self.now=i, j
@@ -484,6 +503,7 @@ class Maze():
 
     
     from PIL import ImageTk
+
     def game_clear(self):
         self.playing=False
 
@@ -492,7 +512,11 @@ class Maze():
             CANVAS_HEIGHT // 2,
             font=("", 80),
             text="ゲームクリア！"
-        )
+        ) 
+        # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
+        end = time.time() - begin
+        # ゴール後に経過時間を示したメッセージボックスが出る。　　（遠藤）
+        messagebox.showinfo("GOAL", f"{end}秒かかりました。")
 
         # def clear(self, master=None):
         #     super().__init__(self,master)
@@ -527,8 +551,11 @@ class Maze():
 
 app=tk.Tk()
 
-maze=Maze(app)
+app=tkinter.Tk()
+app.title(u"フレゼミの女！！！！！")    #aoi
 
+maze=Maze(app)
+begin = time.time()
 maze.play()
 
 app.mainloop()
