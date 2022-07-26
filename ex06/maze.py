@@ -15,8 +15,8 @@ HEIGHT = 23
 
 # 色設定
 PATH_COLOR = "white"              #迷路の色
-WALL_COLOR = "MidnightBlue"       #壁の色
-GOAL_COLOR = "pink"               #ゴールの色
+WALL_COLOR = "plum"       #壁の色
+GOAL_COLOR = "blue"               #ゴールの色
 START_COLOR = "red"               #スタートの色
 PASSED_COLOR = "orange"           #海藤表示時の経路の色
 NOW_COLOR = "SkyBlue"             #現在地の色
