@@ -73,6 +73,13 @@ class Maze():
         # ウィジェットを作成して迷路を表示
         self.createWidgets()
 
+        def func(event):
+            maze=Maze(app)
+            maze.play()
+        
+        app.bind( '<Key-h>', func )
+
+
     def createMaze(self):
         '''迷路の元になる２次元リストを作成'''
 
@@ -200,6 +207,8 @@ class Maze():
                         self.dig(i + 2, j)
 
                 right = False
+    
+    
 
     def change_color(self, i, j):
         '''(i,j)座標に対応する長方形の色を変更'''
@@ -235,13 +244,17 @@ class Maze():
     def createWidgets(self):
         '''ウィジェットを作成する'''
 
+        
+
         # キャンバスウィジェットの作成と配置
-        self.canvas = tkinter.Canvas(
+        self.canvas = tk.Canvas(
             self.master,
             width=CANVAS_WIDTH,
             height=CANVAS_HEIGHT,
         )
-        self.canvas.pack()
+        self.canvas.place(x=0, y=0)
+
+        
 
         for j in range(self.height):
             for i in range(self.width):
@@ -262,8 +275,10 @@ class Maze():
                 # 長方形に色をつける
                 self.change_color(i, j)
 
+        # ボタンの作成と配置
         btn = tkinter.Button(app, text="answer", command=self.show_answer, height=1,width=5)
-        btn.place(x=700, y=5)  #丸山
+        btn.place(x=700, y=5)    #丸山
+        
 
     def resolve_maze(self, i, j):
         '''(i,j)マスから移動できる方向に１マス進む'''
@@ -347,14 +362,16 @@ class Maze():
             # 答えを見つけ出して表示する
             self.resolve_maze(self.start[0], self.start[1])
 
+    
+
     def play(self):
         '''ゲームプレイを開始する'''
 
         # ゲームプレイフラグをTrueにセット
         self.playing = True
 
-        # 現在地をスタート値値に設定
-        self.now = self.start
+        # 現在地をスタート値に設定
+        self.now = self.start  #self.now
 
         # 上下左右キーに対してイベント受付設定
         self.master.bind("<KeyPress-Up>", self.up_move)
@@ -370,9 +387,14 @@ class Maze():
         i, j = self.now
         #i, j = self.after
 
+        def key_handler(e):
+            print(e.keycode)
+
         # GOALであれば終了処理
         if self.maze[j][i] == GOAL:
-            self.game_clear()
+            txt = tkinter.Entry(app)
+            txt.place(x=800, y=450, width=400, height=200)
+            txt.bind("<KeyPress>", key_handler)
             return
 
         # 現在地を更新
@@ -470,8 +492,8 @@ class Maze():
         if i < 0 or i >= self.width or j < 0 or j >= self.height or self.maze[j][i] == WALL:
             return
 
+        self.before=self.now  #
         self.before=self.now
-        
 
         # 移動後の座標を現在位置に設定
         self.now=i, j
@@ -498,9 +520,9 @@ class Maze():
         self.master.unbind("<KeyPress-Left>")
         self.master.unbind("<KeyPress-Right>")
         self.master.unbind("<KeyPress-Down>")
-
+    
 app=tkinter.Tk()
-app.title("フレゼミの女！！！！！")    #aoi
+app.title("フレゼミの女！！！！！")    #久保
 
 maze=Maze(app)
 begin = time.time()
