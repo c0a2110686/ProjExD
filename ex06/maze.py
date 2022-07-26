@@ -1,6 +1,4 @@
-from dis import show_code
-from re import L
-import tkinter as tk
+import tkinter 
 
 #追加したい物　自分の足跡をつける機能を追加する
 #壁を0　#通路を1
@@ -81,7 +79,12 @@ class Maze():
         # ウィジェットを作成して迷路を表示
         self.createWidgets()
 
+        def func(event):
+            maze=Maze(app)
+            maze.play()
         
+        app.bind( '<Key-h>', func )
+
 
     def createMaze(self):
         '''迷路の元になる２次元リストを作成'''
@@ -279,11 +282,12 @@ class Maze():
                 self.change_color(i, j)
 
         # ボタンの作成と配置
-        btn = tk.Button(app, text="answer", command=self.show_answer, height=1,width=5)
+        btn = tkinter.Button(app, text="answer", command=self.show_answer, height=1,width=5)
         btn.place(x=700, y=5)    #丸山
         
 
     
+
 
     def resolve_maze(self, i, j):
         '''(i,j)マスから移動できる方向に１マス進む'''
@@ -392,9 +396,14 @@ class Maze():
         i, j = self.now
         #i, j = self.after
 
+        def key_handler(e):
+            print(e.keycode)
+
         # GOALであれば終了処理
         if self.maze[j][i] == GOAL:
-            self.game_clear()
+            txt = tkinter.Entry(app)
+            txt.place(x=800, y=450, width=400, height=200)
+            txt.bind("<KeyPress>", key_handler)
             return
 
         # 現在地を更新
@@ -501,9 +510,6 @@ class Maze():
         # 座標に移動する
         self.update()
 
-    
-    from PIL import ImageTk
-
     def game_clear(self):
         self.playing=False
 
@@ -552,7 +558,7 @@ class Maze():
 app=tk.Tk()
 
 app=tkinter.Tk()
-app.title(u"フレゼミの女！！！！！")    #aoi
+app.title(u"フレゼミの女！！！！！")    #久保
 
 maze=Maze(app)
 begin = time.time()
