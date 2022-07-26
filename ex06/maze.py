@@ -16,7 +16,7 @@ HEIGHT = 23
 # 色設定
 PATH_COLOR = "white"              #迷路の色
 WALL_COLOR = "MidnightBlue"       #壁の色
-GOAL_COLOR = "blue"               #ゴールの色
+GOAL_COLOR = "pink"               #ゴールの色
 START_COLOR = "red"               #スタートの色
 PASSED_COLOR = "orange"           #海藤表示時の経路の色
 NOW_COLOR = "SkyBlue"             #現在地の色
@@ -488,7 +488,7 @@ class Maze():
             CANVAS_WIDTH // 2,
             CANVAS_HEIGHT // 2,
             fill="red",
-            font=("@Terminal", 100),
+            font=("@Terminal", 100), #三島
             text="GAME CLEAR!!",
         ) 
         # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
