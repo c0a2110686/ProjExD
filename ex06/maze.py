@@ -472,6 +472,7 @@ class Maze():
         # 座標に移動する
         self.update()
 
+
     def game_clear(self):
         self.playing=False
 
@@ -480,8 +481,10 @@ class Maze():
             CANVAS_HEIGHT // 2,
             font=("", 80),
             text="ゲームクリア！"
-        )
+        ) 
+        # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
         end = time.time() - begin
+        # ゴール後に経過時間を示したメッセージボックスが出る。　　（遠藤）
         messagebox.showinfo("GOAL", f"{end}秒かかりました。")
 
         self.master.unbind("<KeyPress-Up>")
