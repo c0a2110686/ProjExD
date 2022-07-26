@@ -247,7 +247,7 @@ class Maze():
         
 
         # キャンバスウィジェットの作成と配置
-        self.canvas = tk.Canvas(
+        self.canvas = tkinter.Canvas(
             self.master,
             width=CANVAS_WIDTH,
             height=CANVAS_HEIGHT,
