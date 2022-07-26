@@ -2,6 +2,8 @@
 #壁を0　#通路を1
 import tkinter
 import random
+from tkinter import messagebox
+import time
 
 # キャンバスのサイズ設定
 CANVAS_WIDTH = 1600 #元サイズ1600
@@ -483,6 +485,7 @@ class Maze():
         # 座標に移動する
         self.update()
 
+
     def game_clear(self):
         self.playing=False
 
@@ -491,7 +494,11 @@ class Maze():
             CANVAS_HEIGHT // 2,
             font=("", 80),
             text="ゲームクリア！"
-        )
+        ) 
+        # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
+        end = time.time() - begin
+        # ゴール後に経過時間を示したメッセージボックスが出る。　　（遠藤）
+        messagebox.showinfo("GOAL", f"{end}秒かかりました。")
 
         self.master.unbind("<KeyPress-Up>")
         self.master.unbind("<KeyPress-Left>")
@@ -502,7 +509,7 @@ app=tkinter.Tk()
 app.title(u"フレゼミの女！！！！！")    #aoi
 
 maze=Maze(app)
-
+begin = time.time()
 maze.play()
 
 app.mainloop()
