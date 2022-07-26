@@ -252,7 +252,7 @@ class Maze():
             width=CANVAS_WIDTH,
             height=CANVAS_HEIGHT,
         )
-        self.canvas()
+        self.canvas.pack()
 
         
 
