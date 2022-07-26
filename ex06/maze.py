@@ -1,5 +1,3 @@
-import tkinter 
-
 #追加したい物　自分の足跡をつける機能を追加する
 #壁を0　#通路を1
 import tkinter
@@ -8,8 +6,6 @@ from tkinter import messagebox
 import time
 
 # キャンバスのサイズ設定
-CANVAS_WIDTH = 800
-CANVAS_HEIGHT = 450
 CANVAS_WIDTH = 1600 #元サイズ1600
 CANVAS_HEIGHT = 900 #元サイズ900
 
@@ -39,8 +35,6 @@ UP = 0
 DOWN = 1
 LEFT = 2
 RIGHT = 3
-
-
 
 class Maze():
     def __init__(self, master):
@@ -286,9 +280,6 @@ class Maze():
         btn.place(x=700, y=5)    #丸山
         
 
-    
-
-
     def resolve_maze(self, i, j):
         '''(i,j)マスから移動できる方向に１マス進む'''
 
@@ -510,6 +501,7 @@ class Maze():
         # 座標に移動する
         self.update()
 
+
     def game_clear(self):
         self.playing=False
 
@@ -524,41 +516,13 @@ class Maze():
         # ゴール後に経過時間を示したメッセージボックスが出る。　　（遠藤）
         messagebox.showinfo("GOAL", f"{end}秒かかりました。")
 
-        # def clear(self, master=None):
-        #     super().__init__(self,master)
-        #     self.canvas = tk.Canvas(self.master)
-        #     self.master = tk.PhotoImage(file="ProjExD-1/ex06/goal4.png")
-        #     self.master = self.master.zoom(8)  #画像のサイズを変更
-        #     self.master = self.master.subsample(32)  #もともとの画像の大きさ
-
-        #     self.update()
-        #     # mx, my = 1, 1
-        #     # cx, cy = mx*100+50, my*100+50
-        #     #cx, cy = 300, 400
-        #     self.canvas.create_image(CANVAS_WIDTH//2, CANVAS_HEIGHT//2, image=self.master)
-
         self.master.unbind("<KeyPress-Up>")
         self.master.unbind("<KeyPress-Left>")
         self.master.unbind("<KeyPress-Right>")
         self.master.unbind("<KeyPress-Down>")
     
-    # def clear(self, master=None):
-    #         # super().__init__(self,master)
-    #         self.canvas = tk.Canvas(self.master)
-    #         self.master = tk.PhotoImage(file="ProjExD-1/ex06/goal4.png")
-    #         self.master = self.master.zoom(8)  #画像のサイズを変更
-    #         self.master = self.master.subsample(32)  #もともとの画像の大きさ
-
-    #         self.update()
-            # mx, my = 1, 1
-            # cx, cy = mx*100+50, my*100+50
-            #cx, cy = 300, 400
-            #self.canvas.create_image(CANVAS_WIDTH//2, CANVAS_HEIGHT//2, image=self.master)
-
-app=tk.Tk()
-
 app=tkinter.Tk()
-app.title(u"フレゼミの女！！！！！")    #久保
+app.title("フレゼミの女！！！！！")    #久保
 
 maze=Maze(app)
 begin = time.time()
