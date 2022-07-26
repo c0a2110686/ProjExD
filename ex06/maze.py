@@ -263,13 +263,8 @@ class Maze():
                 # 長方形に色をつける
                 self.change_color(i, j)
 
-        # ボタンの作成と配置
-        self.button = tkinter.Button(
-            self.master,
-            text="ボタン",
-            command=self.show_answer
-        )
-        self.button.pack()
+        btn = tkinter.Button(app, text="answer", command=self.show_answer, height=1,width=5)
+        btn.place(x=700, y=5)  #丸山
 
     def resolve_maze(self, i, j):
         '''(i,j)マスから移動できる方向に１マス進む'''
@@ -492,8 +487,9 @@ class Maze():
         self.canvas.create_text(
             CANVAS_WIDTH // 2,
             CANVAS_HEIGHT // 2,
-            font=("", 80),
-            text="ゲームクリア！"
+            fill="red",
+            font=("@Terminal", 100),
+            text="GAME CLEAR!!",
         ) 
         # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
         end = time.time() - begin
