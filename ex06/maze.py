@@ -1,11 +1,19 @@
+import tkinter 
+
+#追加したい物　自分の足跡をつける機能を追加する
+#壁を0　#通路を1
 import tkinter
 import random
+from tkinter import messagebox
+import time
 
 # キャンバスのサイズ設定
-CANVAS_WIDTH = 1600
-CANVAS_HEIGHT = 900
+CANVAS_WIDTH = 800
+CANVAS_HEIGHT = 450
+CANVAS_WIDTH = 1600 #元サイズ1600
+CANVAS_HEIGHT = 900 #元サイズ900
 
-# 迷路のサイズ設定
+# 迷路のサイズ設定#
 WIDTH = 41 
 HEIGHT = 23 
 
@@ -16,6 +24,7 @@ GOAL_COLOR = "blue"               #ゴールの色
 START_COLOR = "red"               #スタートの色
 PASSED_COLOR = "orange"           #海藤表示時の経路の色
 NOW_COLOR = "SkyBlue"             #現在地の色
+AFTER_COLOR = "SpringGreen"       #移動後の色  #三島
 
 # 数値の定義
 PATH = 0
@@ -24,11 +33,13 @@ GOAL = 2
 START = 3
 PASSED = 4
 NOW = 5
+AFTER = 6                         #三島
 
 UP = 0
 DOWN = 1
 LEFT = 2
 RIGHT = 3
+
 
 
 class Maze():
@@ -48,8 +59,12 @@ class Maze():
         # 現在位置
         self.now = None
 
+        #過ぎた後の位置　          #三島
+        self.after = None
+
         # 1つ前の位置
         self.before = None
+
 
         # スタートとゴールの位置
         self.start = None
@@ -198,6 +213,8 @@ class Maze():
                         self.dig(i + 2, j)
 
                 right = False
+    
+    
 
     def change_color(self, i, j):
         '''(i,j)座標に対応する長方形の色を変更'''
@@ -215,6 +232,8 @@ class Maze():
             color = PASSED_COLOR
         elif self.maze[j][i] == NOW:
             color = NOW_COLOR
+        elif self.maze[j][i] == AFTER:  #三島
+            color = AFTER_COLOR
         else:
             print("そんなマスはあり得ません")
             return
@@ -231,13 +250,17 @@ class Maze():
     def createWidgets(self):
         '''ウィジェットを作成する'''
 
+        
+
         # キャンバスウィジェットの作成と配置
-        self.canvas = tkinter.Canvas(
+        self.canvas = tk.Canvas(
             self.master,
             width=CANVAS_WIDTH,
             height=CANVAS_HEIGHT,
         )
-        self.canvas.pack()
+        self.canvas.place(x=0, y=0)
+
+        
 
         for j in range(self.height):
             for i in range(self.width):
@@ -259,12 +282,11 @@ class Maze():
                 self.change_color(i, j)
 
         # ボタンの作成と配置
-        self.button = tkinter.Button(
-            self.master,
-            text="ボタン",
-            command=self.show_answer
-        )
-        self.button.pack()
+        btn = tkinter.Button(app, text="answer", command=self.show_answer, height=1,width=5)
+        btn.place(x=700, y=5)    #丸山
+        
+
+    
 
 
     def resolve_maze(self, i, j):
@@ -349,14 +371,16 @@ class Maze():
             # 答えを見つけ出して表示する
             self.resolve_maze(self.start[0], self.start[1])
 
+    
+
     def play(self):
         '''ゲームプレイを開始する'''
 
         # ゲームプレイフラグをTrueにセット
         self.playing = True
 
-        # 現在地をスタート値値に設定
-        self.now = self.start
+        # 現在地をスタート値に設定
+        self.now = self.start  #self.now
 
         # 上下左右キーに対してイベント受付設定
         self.master.bind("<KeyPress-Up>", self.up_move)
@@ -364,11 +388,13 @@ class Maze():
         self.master.bind("<KeyPress-Left>", self.left_move)
         self.master.bind("<KeyPress-Right>", self.right_move)
 
+#ここに移動後の色を追加する
     def update(self):
         '''移動後の状態に迷路リストを更新'''
 
         # 移動後の現在地を取得
         i, j = self.now
+        #i, j = self.after
 
         def key_handler(e):
             print(e.keycode)
@@ -386,12 +412,12 @@ class Maze():
         # 色を更新
         self.change_color(i, j)
 
-        # 移動前の現在地を取得
+       ##### # 移動前の現在地を取得
         i, j = self.before
 
         # 移動前の位置を更新
         if self.before != self.start:
-            self.maze[j][i] = PATH
+            self.maze[j][i] = AFTER     #三島
         else:
             self.maze[j][i] = START
 
@@ -475,6 +501,7 @@ class Maze():
         if i < 0 or i >= self.width or j < 0 or j >= self.height or self.maze[j][i] == WALL:
             return
 
+        self.before=self.now  #
         self.before=self.now
 
         # 移動後の座標を現在位置に設定
@@ -482,7 +509,7 @@ class Maze():
 
         # 座標に移動する
         self.update()
-    
+
     def game_clear(self):
         self.playing=False
 
@@ -491,18 +518,50 @@ class Maze():
             CANVAS_HEIGHT // 2,
             font=("", 80),
             text="ゲームクリア！"
-        )
+        ) 
+        # ゲーム開始からゴール到着までの時間を測定、 （遠藤）
+        end = time.time() - begin
+        # ゴール後に経過時間を示したメッセージボックスが出る。　　（遠藤）
+        messagebox.showinfo("GOAL", f"{end}秒かかりました。")
+
+        # def clear(self, master=None):
+        #     super().__init__(self,master)
+        #     self.canvas = tk.Canvas(self.master)
+        #     self.master = tk.PhotoImage(file="ProjExD-1/ex06/goal4.png")
+        #     self.master = self.master.zoom(8)  #画像のサイズを変更
+        #     self.master = self.master.subsample(32)  #もともとの画像の大きさ
+
+        #     self.update()
+        #     # mx, my = 1, 1
+        #     # cx, cy = mx*100+50, my*100+50
+        #     #cx, cy = 300, 400
+        #     self.canvas.create_image(CANVAS_WIDTH//2, CANVAS_HEIGHT//2, image=self.master)
 
         self.master.unbind("<KeyPress-Up>")
         self.master.unbind("<KeyPress-Left>")
         self.master.unbind("<KeyPress-Right>")
         self.master.unbind("<KeyPress-Down>")
+    
+    # def clear(self, master=None):
+    #         # super().__init__(self,master)
+    #         self.canvas = tk.Canvas(self.master)
+    #         self.master = tk.PhotoImage(file="ProjExD-1/ex06/goal4.png")
+    #         self.master = self.master.zoom(8)  #画像のサイズを変更
+    #         self.master = self.master.subsample(32)  #もともとの画像の大きさ
+
+    #         self.update()
+            # mx, my = 1, 1
+            # cx, cy = mx*100+50, my*100+50
+            #cx, cy = 300, 400
+            #self.canvas.create_image(CANVAS_WIDTH//2, CANVAS_HEIGHT//2, image=self.master)
+
+app=tk.Tk()
 
 app=tkinter.Tk()
 app.title(u"フレゼミの女！！！！！")    #久保
 
 maze=Maze(app)
-
+begin = time.time()
 maze.play()
 
 app.mainloop()
